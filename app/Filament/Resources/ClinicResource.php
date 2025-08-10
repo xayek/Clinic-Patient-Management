@@ -65,8 +65,8 @@ class ClinicResource extends Resource
     {
         return [
             'index' => Pages\ListClinics::route('/'),
-            'create' => Pages\CreateClinic::route('/create'),
-            'edit' => Pages\EditClinic::route('/{record}/edit'),
+            // 'create' => Pages\CreateClinic::route('/create'),
+            // 'edit' => Pages\EditClinic::route('/{record}/edit'),
         ];
     }
 }
