@@ -24,9 +24,10 @@ class AppointmentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('patient_id')
-                    ->relationship('patient', 'name')
+                    ->relationship('patient', 'name', modifyQueryUsing: fn(Builder $query) =>
+                    $query->whereBelongsTo(Filament::getTenant()))
                     ->required(),
-                Forms\Components\TextInput::make('appointment_time')
+                Forms\Components\TimePicker::make('appointment_time')
                     ->required(),
                 Forms\Components\TextInput::make('appointment_number')
                     ->required()
