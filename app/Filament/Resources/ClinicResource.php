@@ -47,6 +47,22 @@ class ClinicResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('addUsers')
+                ->icon('heroicon-o-plus')
+                ->form(function() {
+                    return [
+                        Forms\Components\Select::make('selectedusers')
+                            ->options(User::pluck('name', 'id')->toArray())
+                            ->multiple()
+                            ->searchable()
+                            ->preload()
+                    ];
+                })
+                ->action(function(Clinic $record, array $data) {
+                    $selectedUsers = $data['selectedusers'];
+
+                    $record->users()->syncWithoutDetaching($selectedUsers);
+                }),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
